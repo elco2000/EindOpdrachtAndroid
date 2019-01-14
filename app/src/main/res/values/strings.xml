@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">BlijdorpApp</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="route1">14:00 - Vissen / 15:00 - Giraffen / 16:00 - Apen</string>
+</resources>
