@@ -1,7 +1,10 @@
 package com.example.elcoo.blijdorpapp;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import java.text.DateFormat;
@@ -29,5 +32,23 @@ public class RoutesActivity extends AppCompatActivity {
 //        if (mdformat.format(calendar.getTime()) < mdformat.format()) {
 //
 //        }
+    }
+
+    public void onClickRoute1(View view) {
+        Intent intent = new Intent(this, MapsActivity.class);
+        intent.putExtra("ROUTE", 1);
+        startActivity(intent);
+    }
+
+    public void onClickRoute2(View view) {
+        Intent intent = new Intent(this, MapsActivity.class);
+        intent.putExtra("ROUTE", 2);
+        startActivity(intent);
+    }
+
+    public void onClickRoute3(View view) {
+        Intent intent = new Intent(this, MapsActivity.class);
+        intent.putExtra("ROUTE", 3);
+        startActivity(intent);
     }
 }

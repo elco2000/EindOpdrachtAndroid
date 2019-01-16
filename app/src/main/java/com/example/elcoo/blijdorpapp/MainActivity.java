@@ -17,23 +17,23 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        SQLiteDatabase blijdorpDB = this.openOrCreateDatabase("blijdorpDB", MODE_PRIVATE, null);
-
-        File dbFile = getDatabasePath("blijdorpDB");
-        if(dbFile.exists()) {
-            Log.i("Database", "bestaat");
-        } else {
-            Log.i("Database", "bestaat niet");
-        }
-
-        blijdorpDB.execSQL("CREATE TABLE IF NOT EXISTS "
-                + "animal"
-                + " (Id INTEGER, Name VARCHAR, Description VARCHAR );");
-
-        blijdorpDB.execSQL("INSERT INTO "
-        + "animal"
-        + " (Id, Name, Description)"
-        + " VALUES (0 ,'vissen', 'Vissen zijn in het water levende gewervelde dieren die in de regel ademhalen met kieuwen')");
+//        SQLiteDatabase blijdorpDB = this.openOrCreateDatabase("blijdorpDB", MODE_PRIVATE, null);
+//
+//        File dbFile = getDatabasePath("blijdorpDB");
+//        if(dbFile.exists()) {
+//            Log.i("Database", "bestaat");
+//        } else {
+//            Log.i("Database", "bestaat niet");
+//        }
+//
+//        blijdorpDB.execSQL("CREATE TABLE IF NOT EXISTS "
+//                + "animal"
+//                + " (Id INTEGER, Name VARCHAR, Description VARCHAR );");
+//
+//        blijdorpDB.execSQL("INSERT INTO "
+//        + "animal"
+//        + " (Id, Name, Description)"
+//        + " VALUES (0 ,'vissen', 'Vissen zijn in het water levende gewervelde dieren die in de regel ademhalen met kieuwen')");
 
 
 //        Cursor c = blijdorpDB.rawQuery("SELECT * FROM animal WHERE Name = 'Vissen'",
