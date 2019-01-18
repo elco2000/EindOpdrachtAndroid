@@ -4,4 +4,6 @@
     <string name="route1">14:00 - Vissen / 14:30 - Ijsberen / 15:30 - Giraffen  </string>
     <string name="route2">14:15 - Vlinders / 15:15 - Kamelen / 16:00 - Leeuwen </string>
     <string name="route3">13:30 - Giraffen / 14:00 - Leeuwen / 15:30 - Ijsberen </string>
+    <string name="directionsApiKey">AIzaSyDDCB9zRY5z61UQjdcsRIy5qDrYWqhJ6aU</string>
+
 </resources>

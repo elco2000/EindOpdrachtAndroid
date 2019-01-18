@@ -1,42 +1,27 @@
 package com.example.elcoo.blijdorpapp;
 
-import android.annotation.SuppressLint;
-import android.app.ProgressDialog;
-import android.content.res.Resources;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.Toast;
+import android.support.v4.app.FragmentActivity;
 
-import com.directions.route.Route;
-import com.directions.route.RouteException;
-import com.directions.route.Routing;
-import com.directions.route.RoutingListener;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.maps.model.Polyline;
-import com.google.android.gms.maps.model.PolylineOptions;
+import com.google.maps.errors.ApiException;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.io.IOException;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
 
     private GoogleMap mMap;
     private String TAG;
+
+    public MapsActivity() throws InterruptedException, ApiException, IOException {
+    }
 
 
     @Override
@@ -55,7 +40,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mapFragment.getMapAsync(this);
 
 
-
     }
 
 
@@ -72,82 +56,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
 
 
-        int route = getIntent().getIntExtra("ROUTE", 0);
-//        SQLiteDatabase blijdorpDB = this.openOrCreateDatabase("blijdorpDB", MODE_PRIVATE, null);
-
-        try {
-            // Customise the styling of the base map using a JSON object defined
-            // in a raw resource file.
-            boolean success = googleMap.setMapStyle(
-                    MapStyleOptions.loadRawResourceStyle(
-                            this, R.raw.style_json));
-
-            if (!success) {
-                Log.e(TAG, "Style parsing failed.");
-            }
-        } catch (Resources.NotFoundException e) {
-            Log.e(TAG, "Can't find style. Error: ", e);
-        }
-        mMap = googleMap;
-
-
-        if (route == 0) {
-            // Add a marker in Sydney and move the camera
-            LatLng sydney = new LatLng(51.928168, 4.444017);
-            mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Blijdorp"));
-            mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
-
-            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 18));
-            // Zoom in, animating the camera.
-            googleMap.animateCamera(CameraUpdateFactory.zoomIn());
-            // Zoom out to zoom level 10, animating with a duration of 2 seconds.
-            googleMap.animateCamera(CameraUpdateFactory.zoomTo(18), 2000, null);
-
-        }
-
-        if (route == 1) {
-            // Add a marker in Sydney and move the camera
-            LatLng sydney = new LatLng(51.928579, 4.445204);
-            mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Blijdorp"));
-            mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
-
-            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 18));
-            // Zoom in, animating the camera.
-            googleMap.animateCamera(CameraUpdateFactory.zoomIn());
-            // Zoom out to zoom level 10, animating with a duration of 2 seconds.
-            googleMap.animateCamera(CameraUpdateFactory.zoomTo(18), 2000, null);
-
-        }
-
-        if (route == 2) {
-            // Add a marker in Sydney and move the camera
-            LatLng sydney = new LatLng(51.927852, 4.446774);
-            mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Blijdorp"));
-            mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
-
-            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 18));
-            // Zoom in, animating the camera.
-            googleMap.animateCamera(CameraUpdateFactory.zoomIn());
-            // Zoom out to zoom level 10, animating with a duration of 2 seconds.
-            googleMap.animateCamera(CameraUpdateFactory.zoomTo(18), 2000, null);
-
-        }
-
-        if (route == 3) {
-            // Add a marker in Sydney and move the camera
-            LatLng sydney = new LatLng(51.925633, 4.449941);
-            mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Blijdorp"));
-            mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
-
-            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 18));
-            // Zoom in, animating the camera.
-            googleMap.animateCamera(CameraUpdateFactory.zoomIn());
-            // Zoom out to zoom level 10, animating with a duration of 2 seconds.
-            googleMap.animateCamera(CameraUpdateFactory.zoomTo(18), 2000, null);
-
-        }
-        // 51.928579, 4.445204 Vissen
-
         final LatLng VISSEN = new LatLng(51.928579, 4.445204);
         final LatLng IJSBEREN = new LatLng(51.927431, 4.444811);
         final LatLng VLINDERS = new LatLng(51.927852, 4.446774);
@@ -156,51 +64,160 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         final LatLng KAMELEN = new LatLng(51.928137, 4.453134);
         final LatLng GORILLAS = new LatLng(51.925087, 4.451513);
 
+        int route = getIntent().getIntExtra("ROUTE", 0);
+//        SQLiteDatabase blijdorpDB = this.openOrCreateDatabase("blijdorpDB", MODE_PRIVATE, null);
 
 
-        Marker vissen = mMap.addMarker(new MarkerOptions()
-                .position(VISSEN)
-                .title("Vissen")
-                .snippet("Voedertijden: 14:00, 15:00, 16:00"));
+        mMap = googleMap;
 
-        Marker ijsberen = mMap.addMarker(new MarkerOptions()
-                .position(IJSBEREN)
-                .title("Ijsberen")
-                .snippet("Voedertijden: 14:30, 15:30, 16:30"));
+        LatLng sydney2 = new LatLng(51.928168, 4.444017);
+        mMap.addMarker(new MarkerOptions().position(sydney2).title("Marker in Blijdorp"));
 
-        Marker vlinders = mMap.addMarker(new MarkerOptions()
-                .position(VLINDERS)
-                .title("Vlinders")
-                .snippet("Voedertijden: 14:15, 15:15, 16:15"));
 
-        Marker leeuwen = mMap.addMarker(new MarkerOptions()
-                .position(LEEUWEN)
-                .title("Leeuwen")
-                .snippet("Voedertijden: 14:00, 15:00, 16:00"));
+        if (route == 0) {
+            // Add a marker in Sydney and move the camera
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney2));
 
-        Marker giraffen = mMap.addMarker(new MarkerOptions()
-                .position(GIRAFFEN)
-                .title("Giraffen")
-                .snippet("Voedertijden: 13:30, 14:30, 15:30"));
+            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney2, 18));
+            // Zoom in, animating the camera.
+            googleMap.animateCamera(CameraUpdateFactory.zoomIn());
+            // Zoom out to zoom level 10, animating with a duration of 2 seconds.
+            googleMap.animateCamera(CameraUpdateFactory.zoomTo(18), 2000, null);
 
-        Marker kamelen = mMap.addMarker(new MarkerOptions()
-                .position(KAMELEN)
-                .title("Kamelen")
-                .snippet("Voedertijden: 13:15, 14:15, 15:15"));
+            Marker vissen = mMap.addMarker(new MarkerOptions()
+                    .position(VISSEN)
+                    .title("Vissen")
+                    .snippet("Voedertijden: 14:00, 15:00, 16:00"));
 
-        Marker gorillas = mMap.addMarker(new MarkerOptions()
-                .position(GORILLAS)
-                .title("Gorillas")
-                .snippet("Voedertijden: 13:20, 14:20, 15:20"));
+            Marker ijsberen = mMap.addMarker(new MarkerOptions()
+                    .position(IJSBEREN)
+                    .title("Ijsberen")
+                    .snippet("Voedertijden: 14:30, 15:30, 16:30"));
+
+            Marker vlinders = mMap.addMarker(new MarkerOptions()
+                    .position(VLINDERS)
+                    .title("Vlinders")
+                    .snippet("Voedertijden: 14:15, 15:15, 16:15"));
+
+            Marker leeuwen = mMap.addMarker(new MarkerOptions()
+                    .position(LEEUWEN)
+                    .title("Leeuwen")
+                    .snippet("Voedertijden: 14:00, 15:00, 16:00"));
+
+            Marker giraffen = mMap.addMarker(new MarkerOptions()
+                    .position(GIRAFFEN)
+                    .title("Giraffen")
+                    .snippet("Voedertijden: 13:30, 14:30, 15:30"));
+
+            Marker kamelen = mMap.addMarker(new MarkerOptions()
+                    .position(KAMELEN)
+                    .title("Kamelen")
+                    .snippet("Voedertijden: 13:15, 14:15, 15:15"));
+
+            Marker gorillas = mMap.addMarker(new MarkerOptions()
+                    .position(GORILLAS)
+                    .title("Gorillas")
+                    .snippet("Voedertijden: 13:20, 14:20, 15:20"));
+
+
+        }
+
+        if (route == 1) {
+            // Add a marker in Sydney and move the camera
+            Marker vissen = mMap.addMarker(new MarkerOptions()
+                    .position(VISSEN)
+                    .title("Vissen")
+                    .snippet("Voedertijden: 14:00, 15:00, 16:00"));
+
+            Marker ijsberen = mMap.addMarker(new MarkerOptions()
+                    .position(IJSBEREN)
+                    .title("Ijsberen")
+                    .snippet("Voedertijden: 14:30, 15:30, 16:30"));
+
+            Marker giraffen = mMap.addMarker(new MarkerOptions()
+                    .position(GIRAFFEN)
+                    .title("Giraffen")
+                    .snippet("Voedertijden: 13:30, 14:30, 15:30"));
+
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(VISSEN));
+
+            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(VISSEN, 18));
+            // Zoom in, animating the camera.
+            googleMap.animateCamera(CameraUpdateFactory.zoomIn());
+            // Zoom out to zoom level 10, animating with a duration of 2 seconds.
+            googleMap.animateCamera(CameraUpdateFactory.zoomTo(18), 2000, null);
+
+        }
+
+        if (route == 2) {
+            Marker vlinders = mMap.addMarker(new MarkerOptions()
+                    .position(VLINDERS)
+                    .title("Vlinders")
+                    .snippet("Voedertijden: 14:15, 15:15, 16:15"));
+
+            Marker leeuwen = mMap.addMarker(new MarkerOptions()
+                    .position(LEEUWEN)
+                    .title("Leeuwen")
+                    .snippet("Voedertijden: 14:00, 15:00, 16:00"));
+
+            Marker kamelen = mMap.addMarker(new MarkerOptions()
+                    .position(KAMELEN)
+                    .title("Kamelen")
+                    .snippet("Voedertijden: 13:15, 14:15, 15:15"));
+            // Add a marker in Sydney and move the camera
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(VLINDERS));
+
+            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(VLINDERS, 18));
+            // Zoom in, animating the camera.
+            googleMap.animateCamera(CameraUpdateFactory.zoomIn());
+            // Zoom out to zoom level 10, animating with a duration of 2 seconds.
+            googleMap.animateCamera(CameraUpdateFactory.zoomTo(18), 2000, null);
+
+        }
+
+        if (route == 3) {
+
+            Marker leeuwen = mMap.addMarker(new MarkerOptions()
+                    .position(LEEUWEN)
+                    .title("Leeuwen")
+                    .snippet("Voedertijden: 14:00, 15:00, 16:00"));
+
+            Marker giraffen = mMap.addMarker(new MarkerOptions()
+                    .position(GIRAFFEN)
+                    .title("Giraffen")
+                    .snippet("Voedertijden: 13:30, 14:30, 15:30"));
+
+            Marker ijsberen = mMap.addMarker(new MarkerOptions()
+                    .position(IJSBEREN)
+                    .title("Ijsberen")
+                    .snippet("Voedertijden: 14:30, 15:30, 16:30"));
+            // Add a marker in Sydney and move the camera
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(GIRAFFEN));
+
+            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(GIRAFFEN, 18));
+            // Zoom in, animating the camera.
+            googleMap.animateCamera(CameraUpdateFactory.zoomIn());
+            // Zoom out to zoom level 10, animating with a duration of 2 seconds.
+            googleMap.animateCamera(CameraUpdateFactory.zoomTo(18), 2000, null);
+
+        }
+        // 51.928579, 4.445204 Vissen
+
+
+//        Polyline polyline1 = googleMap.addPolyline(new PolylineOptions()
+//                .clickable(true)
+//                .add(
+//                        new LatLng(51.928579, 4.445204),
+//                        new LatLng(51.927431, 4.444811)));
+
+
 
 
 
     }
 
 
-
-
-//    public void getFish(){
+    //    public void getFish(){
 //        SQLiteDatabase blijdorpDB = this.openOrCreateDatabase("blijdorpDB", MODE_PRIVATE, null);
 //
 //
@@ -214,4 +231,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 //
 //
 //    }
+//    LatLng origin = new LatLng(51.928579, 4.445204);
+//    LatLng destination = new LatLng(51.928423, 4.450094);
+
+
+//    private GeoApiContext getGeoContext() {
+//        GeoApiContext geoApiContext = new GeoApiContext();
+//        return geoApiContext.setQueryRateLimit(3).setApiKey(String.valueOf("AIzaSyDogPD1i_MgKzjOhnPX1fnhtYTep1VS8LQ")).setConnectTimeout(1, TimeUnit.SECONDS).setReadTimeout(1, TimeUnit.SECONDS).setWriteTimeout(1, TimeUnit.SECONDS);
+//    }
+//
+//    DateTime now = new DateTime();
+//    DirectionsResult result = DirectionsApi.newRequest(getGeoContext()).mode(TravelMode.WALKING).origin(String.valueOf(origin)).destination(String.valueOf(destination)).departureTime(now).await();
+//
+//    private void addPolyline(DirectionsResult results, GoogleMap mMap) {
+//        List<LatLng> decodedPath = PolyUtil.decode(results.routes[0].overviewPolyline.getEncodedPath());
+//        mMap.addPolyline(new PolylineOptions().addAll(decodedPath));
+//    }
 }
+
