@@ -1,7 +1,9 @@
 package com.example.elcoo.blijdorpapp;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -52,6 +54,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      * it inside the SupportMapFragment. This method will only be triggered once the user has
      * installed Google Play services and returned to the app.
      */
+    @SuppressLint("SetTextI18n")
     @Override
     public void onMapReady(GoogleMap googleMap) {
 
@@ -72,6 +75,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         LatLng sydney2 = new LatLng(51.928168, 4.444017);
         mMap.addMarker(new MarkerOptions().position(sydney2).title("Marker in Blijdorp"));
+        TextView textView2 = (TextView) findViewById(R.id.textView2);
 
 
         if (route == 0) {
@@ -83,6 +87,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             googleMap.animateCamera(CameraUpdateFactory.zoomIn());
             // Zoom out to zoom level 10, animating with a duration of 2 seconds.
             googleMap.animateCamera(CameraUpdateFactory.zoomTo(18), 2000, null);
+
+            textView2.setText("  Diergaarde \n  Blijdorp");
 
             Marker vissen = mMap.addMarker(new MarkerOptions()
                     .position(VISSEN)
@@ -123,6 +129,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
 
         if (route == 1) {
+
+            textView2.setText("  14:00 - Vissen \n  14:30 - IJsberen \n  15:30 - Giraffen");
+
             // Add a marker in Sydney and move the camera
             Marker vissen = mMap.addMarker(new MarkerOptions()
                     .position(VISSEN)
@@ -150,6 +159,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
 
         if (route == 2) {
+            textView2.setText("  14:15 - Vlinders \n  15:15 - Kamelen \n  16:00 - Leeuwen");
+
             Marker vlinders = mMap.addMarker(new MarkerOptions()
                     .position(VLINDERS)
                     .title("Vlinders")
@@ -177,6 +188,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         if (route == 3) {
 
+            textView2.setText("  13:30 - Giraffen \n  14:00 - Kamelen \n  15:30 - IJsberen");
             Marker leeuwen = mMap.addMarker(new MarkerOptions()
                     .position(LEEUWEN)
                     .title("Leeuwen")
