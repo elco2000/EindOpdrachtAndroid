@@ -1,8 +1,12 @@
 package com.example.elcoo.blijdorpapp;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.content.ContextCompat;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -59,6 +63,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
 
 
+
+
         final LatLng VISSEN = new LatLng(51.928579, 4.445204);
         final LatLng IJSBEREN = new LatLng(51.927431, 4.444811);
         final LatLng VLINDERS = new LatLng(51.927852, 4.446774);
@@ -72,6 +78,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
         mMap = googleMap;
+
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (ContextCompat.checkSelfPermission(this,
+                    Manifest.permission.ACCESS_FINE_LOCATION)
+                    == PackageManager.PERMISSION_GRANTED) {
+                mMap.setMyLocationEnabled(true);
+            }
+        } else {
+            mMap.setMyLocationEnabled(true);
+        }
 
         LatLng sydney2 = new LatLng(51.928168, 4.444017);
         mMap.addMarker(new MarkerOptions().position(sydney2).title("Marker in Blijdorp"));
